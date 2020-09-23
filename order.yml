@@ -1,0 +1,63 @@
+server:
+  port: 6001
+eureka:
+  instance:
+    hostname: order1
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka01:8762/eureka/
+
+product:
+  ribbon:
+    #NFLoadBalancerRuleClassName: cn.cdqf.order.ribbon.MyIRule
+    #请求链接超时时间
+    ConnectTimeout: 5000
+    #请求处理超时时间 默认值是1秒
+    ReadTimeout: 5000
+    #对所有操作都进行重试
+    OkToRetryOnAllOperatins: false  #Okhttp
+    MaxAutoRetries: 0  #对当前选择的实例重试次数，不包括第一次
+    MaxAutoRetriesNextServer: 0 #切换的重试次数
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.liu.bean
+spring:
+  application:
+    name: orders
+  datasource:
+    druid:
+      connection-properties: druid.stat.mergeSql=true;
+      driver-class-name: com.mysql.jdbc.Driver
+      filter:
+        stat:
+          slow-sql-millis: 1
+      filters: stat,wall
+      initial-size: 5
+      max-active: 30
+      max-pool-prepared-statement-per-connection-size: 50
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      min-idle: 5
+      password: 123456
+      pool-prepared-statements: true
+      stat-view-servlet:
+        login-password: 123
+        login-username: admin
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      url: jdbc:mysql://localhost:3306/productdb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+      use-global-data-source-stat: true
+      username: root
+      validation-query: SELECT 1 FROM DUAL
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+
+
+
+
