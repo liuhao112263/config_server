@@ -1,15 +1,3 @@
-server:
-  port: 6001
-eureka:
-  instance:
-    hostname: order1
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://eureka01:8762/eureka/
-
 product:
   ribbon:
     #NFLoadBalancerRuleClassName: cn.cdqf.order.ribbon.MyIRule
